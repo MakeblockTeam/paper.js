@@ -231,6 +231,9 @@ var PathItem = Item.extend(/** @lends PathItem# */{
                 break;
             case 'a':
                 for (var j = 0; j < length; j += 7) {
+                    if (coords.length < 7 && coords[3] && coords[3].length >= 2) {
+                        coords = coords.slice(0, 3).concat([coords[3][0], coords[3][1]], coords[3].slice(2) ? coords[3].slice(2) : [], coords.slice(4));
+                    }
                     this.arcTo(current = getPoint(j + 5),
                             new Size(+coords[j], +coords[j + 1]),
                             +coords[j + 2], +coords[j + 4], +coords[j + 3]);

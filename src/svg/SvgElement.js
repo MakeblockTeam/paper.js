@@ -48,6 +48,11 @@ var SvgElement = new function() {
                 namespace = attributeNamespace[name];
             if (typeof value === 'number' && formatter)
                 value = formatter.number(value);
+            if (typeof value === 'string') {
+                value = value.replace(/NaN/g, '0');
+            } else if (isNaN(value)) {
+                value = 0;
+            }
             if (namespace) {
                 node.setAttributeNS(namespace, name, value);
             } else {
